@@ -1,12 +1,3 @@
-#''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-"""
-Created on Thu Feb 27 21:59:10 2025
-
-@author: Asieh Daneshi
-This code solves a maze fed to the code as a text file in line 15. 'A' represents
-the start point, 'B' represents the goal, and '#' shows blocked paths.
-"""
-#''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 import numpy as np
 import pandas as pd
 
@@ -60,7 +51,6 @@ def solve_maze_dfs(maze, start, goal):
     visited = set()
 
     while stack:
-        print(stack)
         (row, col), path = stack.pop()      # put the last element of stack in "(row, col), path"
 
         if (row, col) == goal:  # Goal reached

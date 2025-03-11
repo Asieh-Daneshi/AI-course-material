@@ -51,15 +51,37 @@ while(len(np.setdiff1d(Frontiers, Seen))>0 and Frontiers[n]!=endPoint):
                     m=m+1
                     Frontiers.append(Neighbors[a1])
                     print(n)
-                    if m>1:
+                    if m>2:
                         n=n-1
                     
-Solution=Maze
-for a1 in np.arange(0,np.size(Maze,0)):
-    for a2 in np.arange(0,np.size(Maze,1)):
-        if Maze[a1,a2] in Seen:
-            Solution[a1,a2]=8
-        elif Maze[a1,a2]!=0:
-            Solution[a1,a2]=1
-    
-            
+# Solution=Maze
+# for a1 in np.arange(0,np.size(Maze,0)):
+#     for a2 in np.arange(0,np.size(Maze,1)):
+#         if Maze[a1,a2] in Seen:
+#             Solution[a1,a2]=8
+#         elif Maze[a1,a2]!=0:
+#             Solution[a1,a2]=1
+# removing wrong pathes
+ENDs=[]
+Counts=[]
+for a1 in np.arange(0,len(Seen)):
+    Neighbors=get_neighbors(Maze, list(np.where(Maze == Seen[a1]))[0][0],list(np.where(Maze == Seen[a1]))[1][0])
+    count = 0
+    for a2 in np.arange(0,len(Neighbors)):
+        if ((Neighbors[a2] in Seen) and Neighbors[a2] != 0 ):
+            count =count+1
+        if (Neighbors[a2] == -2):
+            Goal=Seen[a1]
+    Counts.append(count)
+    if Counts[a1]==1 and a1>1:
+        ENDs.append(Seen[a1])
+
+
+# Solution=[]
+# Solution.append(endPoint) 
+# n=0 
+# Neighbors=get_neighbors(Maze, list(np.where(Maze == Solution[0]))[0][0],list(np.where(Maze == Solution[0]))[1][0])  
+# while ((list(set(Neighbors) & set(Seen))) != -1):
+#     Neighbors=get_neighbors(Maze, list(np.where(Maze == Solution[n]))[0][0],list(np.where(Maze == Solution[n]))[1][0])
+#     Solution.append(list(set(Neighbors) & set(Seen)))
+#     n=n+1
